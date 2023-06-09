@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia';
+import { v4 as uuidv4 } from 'uuid';
+function generateId() {
+  return uuidv4();
+}
 const initialPersons = [
   {
-    id: 0,
+    id: generateId(),
     name: 'Ivan',
     surname: 'Ivanov',
     experience: 5,
@@ -9,7 +13,7 @@ const initialPersons = [
     address: 'Russia, Moscow, Pushkin street',
   },
   {
-    id: 1,
+    id: generateId(),
     name: 'Olga',
     surname: 'Petrova',
     experience: 8,
@@ -17,7 +21,7 @@ const initialPersons = [
     address: 'Russia, St. Petersburg, Nevsky Prospekt',
   },
   {
-    id: 2,
+    id: generateId(),
     name: 'Alexander',
     surname: 'Sidorov',
     experience: 3,
@@ -30,37 +34,36 @@ export const useEmployeeStore = defineStore('employee', {
     persons: initialPersons,
   }),
   getters: {
-    getName() {
-      return this.name;
+    findEmployeeById: (state) => (id) => {
+      return state.persons.find((person) => person.id === id) || null;
     },
-    getSurname() {
-      return this.surname;
-    },
-    getExperience() {
-      return this.experience;
-    },
-    getAge() {
-      return this.age;
-    },
-    getAddress() {
-      return this.address;
+    findEmployee: (state) => (employee) => {
+      return (
+        state.persons.find((person) => {
+          return (
+            person.name === employee.name &&
+            person.surname === employee.surname &&
+            person.experience === employee.experience &&
+            person.age === employee.age &&
+            person.address === employee.address
+          );
+        }) || null
+      );
     },
   },
   actions: {
-    setName(name) {
-      this.name = name;
+    updateEmployee(id, newData) {
+      // Ищем сотрудника по id и обновляем его данные
+      const index = this.persons.findIndex((person) => person.id === id);
+      Object.assign(this.persons[index], newData);
     },
-    setSurname(surname) {
-      this.surname = surname;
-    },
-    setExperience(experience) {
-      this.experience = experience;
-    },
-    setAge(age) {
-      this.age = age;
-    },
-    setAddress(address) {
-      this.address = address;
+    addEmployee(data) {
+      // Добавляем нового сотрудника в массив persons
+      const newEmployee = {
+        id: generateId(),
+        ...data,
+      };
+      this.persons.push(newEmployee);
     },
   },
 });

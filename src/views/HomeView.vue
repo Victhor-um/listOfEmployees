@@ -1,7 +1,7 @@
 <script setup>
-import TableEmployee from '../components/TableEmployee.vue';
+import TablePersons from '../components/TablePersons.vue';
 </script>
 
 <template>
-  <TableEmployee />
+  <TablePersons />
 </template>

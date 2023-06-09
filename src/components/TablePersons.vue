@@ -23,13 +23,15 @@
       </tr>
     </tfoot>
     <tbody>
-      <tr v-for="employee in storeEmployee.persons" :key="employee.id">
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.surname }}</td>
-        <td>{{ employee.experience }}</td>
-        <td>{{ employee.age }}</td>
-        <td>{{ employee.address }}</td>
-        <button class="button">Edit</button>
+      <tr v-for="person in storeEmployee.persons" :key="person.id">
+        <td>{{ person.name }}</td>
+        <td>{{ person.surname }}</td>
+        <td>{{ person.experience }}</td>
+        <td>{{ person.age }}</td>
+        <td>{{ person.address }}</td>
+        <RouterLink :to="`/formEmployee/${person.id}`" class="button"
+          >Edit</RouterLink
+        >
       </tr>
     </tbody>
   </table>
@@ -39,7 +41,6 @@
 import { useEmployeeStore } from '@/stores/storeEmployee';
 
 const storeEmployee = useEmployeeStore();
-console.log(storeEmployee.persons);
 </script>
 
 <style lang="scss" scoped></style>

@@ -26,7 +26,7 @@
       <div class="navbar-start">
         <RouterLink to="/" class="navbar-item"> Home </RouterLink>
 
-        <RouterLink to="/formEmployee" class="navbar-item">
+        <RouterLink to="/formEmployee/id" class="navbar-item">
           ADD-TO-FORM
         </RouterLink>
       </div>
