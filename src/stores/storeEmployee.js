@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
-import { v4 as uuidv4 } from 'uuid';
 function generateId() {
-  return uuidv4();
+  let timestamp = new Date().getTime();
+  let uniqueID = Math.random().toString(36).substr(2, 9);
+  return `${timestamp}${uniqueID}`;
 }
 const initialPersons = [
   {
