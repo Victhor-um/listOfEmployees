@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th><abbr title="Name">Name</abbr></th>
-        <th><abbr title="surName">Sur Name</abbr></th>
+        <th><abbr title="SurName">SurName</abbr></th>
         <th><abbr title="Experience">Experience</abbr></th>
         <th><abbr title="Age">Age</abbr></th>
         <th>
@@ -14,7 +14,7 @@
     <tfoot>
       <tr>
         <th><abbr title="Name">Name</abbr></th>
-        <th><abbr title="surName">Sur Name</abbr></th>
+        <th><abbr title="SurName">SurName</abbr></th>
         <th><abbr title="Experience">Experience</abbr></th>
         <th><abbr title="Age">Age</abbr></th>
         <th>

@@ -67,6 +67,9 @@
         >
           Submit
         </button>
+        <button class="button is-danger" @click.prevent="clearForm">
+          Clear
+        </button>
       </div>
     </div>
   </form>
@@ -79,25 +82,20 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const routeId = route.params.id;
+const isNewPerson = routeId === 'id';
 const storeEmployee = useEmployeeStore();
-if (routeId === 'id') {
-  const name = ref('');
-  const surname = ref('');
-  const age = ref();
-  const experience = ref();
-  const address = ref('');
-} else {
+if (!isNewPerson) {
+  onMounted(() => {
+    const person = storeEmployee.findEmployeeById(route.params.id);
+    if (person) {
+      name.value = person.name;
+      surname.value = person.surname;
+      age.value = person.age;
+      experience.value = person.experience;
+      address.value = person.address;
+    }
+  });
 }
-onMounted(() => {
-  const person = storeEmployee.findEmployeeById(route.params.id);
-  if (person) {
-    name.value = person.name;
-    surname.value = person.surname;
-    age.value = person.age;
-    experience.value = person.experience;
-    address.value = person.address;
-  }
-});
 const name = ref('');
 const surname = ref('');
 const age = ref();
@@ -126,14 +124,16 @@ function handleSubmit() {
     address: address.value,
   };
 
-  const existingEmployee = storeEmployee.findEmployee(newEmployee);
-
-  if (existingEmployee) {
-    storeEmployee.updateEmployee(existingEmployee.id, newEmployee);
-  } else {
+  if (isNewPerson) {
     storeEmployee.addEmployee(newEmployee);
+  } else {
+    storeEmployee.updateEmployee(routeId, newEmployee);
   }
 
+  clearForm();
+}
+
+function clearForm() {
   name.value = '';
   surname.value = '';
   age.value = null;

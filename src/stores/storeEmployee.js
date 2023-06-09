@@ -35,20 +35,7 @@ export const useEmployeeStore = defineStore('employee', {
   }),
   getters: {
     findEmployeeById: (state) => (id) => {
-      return state.persons.find((person) => person.id === id) || null;
-    },
-    findEmployee: (state) => (employee) => {
-      return (
-        state.persons.find((person) => {
-          return (
-            person.name === employee.name &&
-            person.surname === employee.surname &&
-            person.experience === employee.experience &&
-            person.age === employee.age &&
-            person.address === employee.address
-          );
-        }) || null
-      );
+      return state.persons.find((person) => person.id === id) || false;
     },
   },
   actions: {
